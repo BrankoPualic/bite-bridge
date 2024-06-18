@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OData" Version="8.2.5" />
+    <PackageReference Include="Reinforced.Typings" Version="1.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BiteBridge.Common\BiteBridge.Common.csproj" />
+    <ProjectReference Include="..\BiteBridge.DependencyInjection\BiteBridge.DependencyInjection.csproj" />
+    <ProjectReference Include="..\BiteBridge.Application\BiteBridge.Application.csproj" />
+  </ItemGroup>
+
+    <Target Name="CompileTypeScript" />
+
+</Project>

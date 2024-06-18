@@ -1,0 +1,34 @@
+﻿using MediatR;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+
+namespace BiteBridge.Application.BusinessLogic._Behaviors;
+
+public class PerformanceMonitoringBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+	where TRequest : IRequest<TResponse>
+{
+	private readonly ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> _logger;
+
+	public PerformanceMonitoringBehavior(ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> logger)
+	{
+		_logger = logger;
+	}
+
+	public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+	{
+		var timer = Stopwatch.StartNew();
+
+		var response = await next();
+
+		timer.Stop();
+
+		var elapsedMilliseconds = timer.ElapsedMilliseconds;
+
+		if (elapsedMilliseconds > 1000)
+		{
+			_logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} ms)", typeof(TRequest).Name, elapsedMilliseconds);
+		}
+
+		return response;
+	}
+}
