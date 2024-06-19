@@ -73,14 +73,4 @@ public partial class ApplicationContext : DbContext
                     e.Update();
                 }
             }
-
-            if (entry.State == EntityState.Deleted)
-            {
-                if (entry.Entity is AuditableEntity e)
-                {
-                    e.Delete();
-                }
-            }
-        }
-    }
 }
