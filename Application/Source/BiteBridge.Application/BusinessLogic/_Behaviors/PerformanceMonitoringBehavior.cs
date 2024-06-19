@@ -24,7 +24,7 @@ public class PerformanceMonitoringBehavior<TRequest, TResponse> : IPipelineBehav
 
         timer.Stop();
 
-        var elapsedMilliseconds = timer.ElapsedMilliseconds;
+		}
 
         if (elapsedMilliseconds > THRESHOLD)
         {
