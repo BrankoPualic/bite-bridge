@@ -6,82 +6,82 @@ namespace BiteBridge.Persistence.Contexts;
 
 public partial class ApplicationContext : DbContext
 {
-	private readonly string _connectionString;
+    private readonly string _connectionString;
 
-	public ApplicationContext()
-	{
-		_connectionString = "Data Source=localhost;Initial Catalog=LinkUp;TrustServerCertificate=true;Integrated security=true";
-	}
+    public ApplicationContext()
+    {
+        _connectionString = "SERVER=DESKTOP-0TO9QCF; DATABASE=BiteBridge; USER ID=Branko-Obrad-Local; PASSWORD=fWp8M9V6mpMUMd; TrustServerCertificate=true;";
+    }
 
-	public ApplicationContext(string connectionString) : base()
-	{
-		_connectionString = connectionString;
-	}
+    public ApplicationContext(string connectionString) : base()
+    {
+        _connectionString = connectionString;
+    }
 
-	public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
-	{
-	}
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+    {
+    }
 
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
-		if (!optionsBuilder.IsConfigured)
-		{
-			optionsBuilder.UseSqlServer(_connectionString);
-		}
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
 
-		base.OnConfiguring(optionsBuilder);
-	}
+        base.OnConfiguring(optionsBuilder);
+    }
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-		modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 
-		base.OnModelCreating(modelBuilder);
-	}
+        base.OnModelCreating(modelBuilder);
+    }
 
-	public override int SaveChanges()
-	{
-		Save();
+    public override int SaveChanges()
+    {
+        Save();
 
-		return base.SaveChanges();
-	}
+        return base.SaveChanges();
+    }
 
-	public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-	{
-		Save();
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        Save();
 
-		return base.SaveChangesAsync(cancellationToken);
-	}
+        return base.SaveChangesAsync(cancellationToken);
+    }
 
-	private void Save()
-	{
-		IEnumerable<EntityEntry> entries = this.ChangeTracker.Entries();
+    private void Save()
+    {
+        IEnumerable<EntityEntry> entries = this.ChangeTracker.Entries();
 
-		foreach (EntityEntry entry in entries)
-		{
-			if (entry.State == EntityState.Added)
-			{
-				if (entry.Entity is AuditableEntity e)
-				{
-					e.Create();
-				}
-			}
+        foreach (EntityEntry entry in entries)
+        {
+            if (entry.State == EntityState.Added)
+            {
+                if (entry.Entity is AuditableEntity e)
+                {
+                    e.Create();
+                }
+            }
 
-			if (entry.State == EntityState.Modified)
-			{
-				if (entry.Entity is AuditableEntity e)
-				{
-					e.Update();
-				}
-			}
+            if (entry.State == EntityState.Modified)
+            {
+                if (entry.Entity is AuditableEntity e)
+                {
+                    e.Update();
+                }
+            }
 
-			if (entry.State == EntityState.Deleted)
-			{
-				if (entry.Entity is AuditableEntity e)
-				{
-					e.Delete();
-				}
-			}
-		}
-	}
+            if (entry.State == EntityState.Deleted)
+            {
+                if (entry.Entity is AuditableEntity e)
+                {
+                    e.Delete();
+                }
+            }
+        }
+    }
 }

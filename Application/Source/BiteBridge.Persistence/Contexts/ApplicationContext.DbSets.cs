@@ -5,5 +5,6 @@ namespace BiteBridge.Persistence.Contexts;
 
 public partial class ApplicationContext
 {
-	public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
+    public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
+    public virtual DbSet<Category> Categories { get; set; }
 }
