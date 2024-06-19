@@ -28,8 +28,7 @@ internal class UserConfiguration : EntityConfiguration<User>
 			.IsUnique();
 
 		builder.Property(x => x.Password)
-			.IsRequired()
-			.HasMaxLength(30);
+			.IsRequired();
 
 		builder.Property(x => x.HomeNumber)
 			.IsRequired()

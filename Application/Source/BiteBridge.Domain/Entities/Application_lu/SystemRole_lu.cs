@@ -7,5 +7,5 @@ namespace BiteBridge.Domain.Entities.Application_lu;
 public class SystemRole_lu : Entity_lu
 {
 	[InverseProperty("Role")]
-	public ICollection<UserRole> UserRoles { get; set; }
+	public virtual ICollection<UserRole> UserRoles { get; set; } = [];
 }
