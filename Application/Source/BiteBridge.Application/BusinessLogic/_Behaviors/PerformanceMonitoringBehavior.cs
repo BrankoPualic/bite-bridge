@@ -7,9 +7,8 @@ namespace BiteBridge.Application.BusinessLogic._Behaviors;
 public class PerformanceMonitoringBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
 	where TRequest : IRequest<TResponse>
 {
-	private const int TRESHOLD = 5000;
-
 	private readonly ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> _logger;
+	private const int THRESHOLD = 5000;
 
 	public PerformanceMonitoringBehavior(ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> logger)
 	{
@@ -26,7 +25,7 @@ public class PerformanceMonitoringBehavior<TRequest, TResponse> : IPipelineBehav
 
 		var elapsedMilliseconds = timer.ElapsedMilliseconds;
 
-		if (elapsedMilliseconds > TRESHOLD)
+		if (elapsedMilliseconds > THRESHOLD)
 		{
 			_logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} ms)", typeof(TRequest).Name, elapsedMilliseconds);
 		}
