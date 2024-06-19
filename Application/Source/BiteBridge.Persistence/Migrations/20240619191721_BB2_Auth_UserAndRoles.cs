@@ -33,7 +33,7 @@ namespace BiteBridge.Persistence.Migrations
                     MiddleName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HomeNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     OfficeNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),

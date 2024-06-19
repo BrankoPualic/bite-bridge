@@ -25,5 +25,5 @@ public class User : AuditableEntity
 	public string DetailsJson { get; set; } = string.Empty;
 
 	[InverseProperty(nameof(User))]
-	public ICollection<UserRole> UserRoles { get; set; } = [];
+	public virtual ICollection<UserRole> UserRoles { get; set; } = [];
 }

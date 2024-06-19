@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiteBridge.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240619182526_BB2_Auth_UserAndRoles")]
+    [Migration("20240619191721_BB2_Auth_UserAndRoles")]
     partial class BB2_Auth_UserAndRoles
     {
         /// <inheritdoc />
@@ -106,8 +106,7 @@ namespace BiteBridge.Persistence.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

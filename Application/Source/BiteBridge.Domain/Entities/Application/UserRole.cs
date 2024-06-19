@@ -10,8 +10,8 @@ public class UserRole
 	public int RoleId { get; set; }
 
 	[ForeignKey(nameof(UserId))]
-	public User User { get; set; }
+	public virtual User User { get; set; }
 
 	[ForeignKey(nameof(RoleId))]
-	public SystemRole_lu Role { get; set; }
+	public virtual SystemRole_lu Role { get; set; }
 }
