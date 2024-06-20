@@ -7,17 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("AllowedCrossOrigins",
-		builder =>
-		{
-			builder.WithOrigins
-				(
-					"https://localhost:4200",
-					"http://localhost:4200"
-				)
-				.AllowAnyMethod()
-				.AllowAnyHeader();
-		});
+    options.AddPolicy("AllowedCrossOrigins",
+        builder =>
+        {
+            builder.WithOrigins
+                (
+                    "https://localhost:4200",
+                    "http://localhost:4200"
+                )
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
 });
 
 builder.Services.AllApplicationServices(builder.Configuration);
