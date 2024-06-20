@@ -5,32 +5,31 @@ using System.Diagnostics;
 namespace BiteBridge.Application.BusinessLogic._Behaviors;
 
 public class PerformanceMonitoringBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
+	where TRequest : IRequest<TResponse>
 {
-    private const int THRESHOLD = 5000;
+	private readonly ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> _logger;
+	private const int THRESHOLD = 5000;
 
-    private readonly ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> _logger;
+	public PerformanceMonitoringBehavior(ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> logger)
+	{
+		_logger = logger;
+	}
 
-    public PerformanceMonitoringBehavior(ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> logger)
-    {
-        _logger = logger;
-    }
+	public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+	{
+		var timer = Stopwatch.StartNew();
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
-    {
-        var timer = Stopwatch.StartNew();
+		var response = await next();
 
-        var response = await next();
+		timer.Stop();
 
-        timer.Stop();
+		var elapsedMilliseconds = timer.ElapsedMilliseconds;
 
-        var elapsedMilliseconds = timer.ElapsedMilliseconds;
+		if (elapsedMilliseconds > THRESHOLD)
+		{
+			_logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} ms)", typeof(TRequest).Name, elapsedMilliseconds);
+		}
 
-        if (elapsedMilliseconds > THRESHOLD)
-        {
-            _logger.LogWarning("Long Running Request: {Name} ({ElapsedMilliseconds} ms)", typeof(TRequest).Name, elapsedMilliseconds);
-        }
-
-        return response;
-    }
+		return response;
+	}
 }
