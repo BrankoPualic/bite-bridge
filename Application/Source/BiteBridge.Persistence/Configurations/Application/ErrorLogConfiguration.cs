@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace BiteBridge.Persistence.Configurations;
+namespace BiteBridge.Persistence.Configurations.Application;
 
 internal class ErrorLogConfiguration : IEntityTypeConfiguration<ErrorLog>
 {

@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BiteBridge.Application.Identity.Services;
 
@@ -17,7 +18,7 @@ public class TokenService : ITokenService
 		_configuration = configuration;
 	}
 
-	public string GenerateJwtToken(Guid userId, string[] roles, string username, string email)
+	public string GenerateJwtToken(Guid userId, string[] roles, string fullName, string email)
 	{
 		var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -32,7 +33,7 @@ public class TokenService : ITokenService
 		{
 			new(JwtRegisteredClaimNames.NameId, userId.ToString()),
 			new(JwtRegisteredClaimNames.Iss, jwtSecrets.Issuer!),
-			new(JwtRegisteredClaimNames.Name, username),
+			new(JwtRegisteredClaimNames.Name, Regex.Replace(fullName, @"\s{2}", " ")),
 			new(JwtRegisteredClaimNames.Email, email)
 		};
 

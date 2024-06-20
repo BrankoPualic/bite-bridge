@@ -8,79 +8,70 @@ namespace BiteBridge.Persistence.Contexts;
 
 public partial class ApplicationContext : DbContext
 {
-    public ApplicationContext()
-    {
-    }
+	public ApplicationContext()
+	{
+	}
 
-    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
-    {
-    }
+	public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+	{
+	}
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            IConfiguration configuration = new ConfigurationBuilder()
-                .AddUserSecrets(Assembly.GetExecutingAssembly())
-                .Build();
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		if (!optionsBuilder.IsConfigured)
+		{
+			IConfiguration configuration = new ConfigurationBuilder()
+				.AddUserSecrets(Assembly.GetExecutingAssembly())
+				.Build();
 
+			optionsBuilder.UseSqlServer(configuration["LOCAL_DEV_DB_CONNECTION"]);
+		}
 
-            optionsBuilder.UseSqlServer(configuration["LOCAL_DEV_DB_CONNECTION"]);
-        }
+		base.OnConfiguring(optionsBuilder);
+	}
 
-        base.OnConfiguring(optionsBuilder);
-    }
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+		base.OnModelCreating(modelBuilder);
+	}
 
-        base.OnModelCreating(modelBuilder);
-    }
+	public override int SaveChanges()
+	{
+		Save();
 
-    public override int SaveChanges()
-    {
-        Save();
+		return base.SaveChanges();
+	}
 
-        return base.SaveChanges();
-    }
+	public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+	{
+		Save();
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        Save();
+		return base.SaveChangesAsync(cancellationToken);
+	}
 
-        return base.SaveChangesAsync(cancellationToken);
-    }
+	private void Save()
+	{
+		IEnumerable<EntityEntry> entries = this.ChangeTracker.Entries();
 
-    private void Save()
-    {
-        IEnumerable<EntityEntry> entries = this.ChangeTracker.Entries();
+		foreach (EntityEntry entry in entries)
+		{
+			if (entry.State == EntityState.Added)
+			{
+				if (entry.Entity is AuditableEntity e)
+				{
+					e.Create();
+				}
+			}
 
-        foreach (EntityEntry entry in entries)
-        {
-            if (entry.State == EntityState.Added)
-            {
-                if (entry.Entity is AuditableEntity e)
-                {
-                    e.Create();
-                }
-            }
-
-            if (entry.State == EntityState.Modified)
-            {
-                if (entry.Entity is AuditableEntity e)
-                {
-                    e.Update();
-                }
-            }
-
-            if (entry.State == EntityState.Deleted)
-            {
-                if (entry.Entity is AuditableEntity e)
-                {
-                    e.Delete();
-                }
-            }
-        }
-    }
+			if (entry.State == EntityState.Modified)
+			{
+				if (entry.Entity is AuditableEntity e)
+				{
+					e.Update();
+				}
+			}
+		}
+	}
 }

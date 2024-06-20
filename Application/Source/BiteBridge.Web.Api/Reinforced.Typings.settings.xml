@@ -35,7 +35,7 @@
 			be used.
 		-->
 		<!--<RtConfigurationMethod></RtConfigurationMethod>-->
-		<RtConfigurationMethod>LinkUp.Web.Api.ReinforcedTypings.FluentConfiguration.Configure</RtConfigurationMethod>
+		<RtConfigurationMethod>BiteBridge.Web.Api.ReinforcedTypings.FluentConfiguration.Configure</RtConfigurationMethod>
 
 		<!--
 			By default all of your typings will be located in single file specified by RtTargetFile.
@@ -55,7 +55,7 @@
 			Note that in case of using RtDivideTypesAmongFiles, RtTargetFile parameter will
 			NOT be used anymore.
 		-->
-		<RtTargetDirectory>$(ProjectDir)ReinforcedTypings\..\..\LinkUp.Web.Client\Workspace\src\app\_generated</RtTargetDirectory>
+		<RtTargetDirectory>$(ProjectDir)ReinforcedTypings\..\..\BiteBridge.Web.Client\Workspace\src\app\_generated</RtTargetDirectory>
 
 		<!--
 			Disables typescript compilation in solution.

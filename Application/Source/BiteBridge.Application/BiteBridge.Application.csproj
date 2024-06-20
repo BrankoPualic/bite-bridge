@@ -14,12 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BiteBridge.Application.Identity\BiteBridge.Application.Identity.csproj" />
     <ProjectReference Include="..\BiteBridge.Common\BiteBridge.Common.csproj" />
     <ProjectReference Include="..\BiteBridge.Domain\BiteBridge.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>
