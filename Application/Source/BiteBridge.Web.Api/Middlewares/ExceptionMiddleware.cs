@@ -2,6 +2,8 @@
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.Net;
+using BiteBridge.Web.Api.Objects;
+using BiteBridge.Application.Exceptions;
 
 namespace BiteBridge.Web.Api.Middlewares;
 
@@ -35,8 +37,29 @@ public class ExceptionMiddleware
 	{
 		logger.LogException(ex);
 		context.Response.ContentType = "application/json";
+		context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-		var response = new Exception("Server error. Please contact system administrator for more details.");
+		object response;
+
+		if (ex is FluentValidationException validationException)
+		{
+			context.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+
+			response = new ValidationExceptionResponse
+			{
+				Message = validationException.Message,
+				Error = validationException.Failures.ToDictionary(
+					_ => _.Key,
+					_ => _.Value)
+			};
+		}
+		else
+		{
+			response = new ExceptionResponse
+			{
+				Message = ex.Message,
+			};
+		}
 
 		var settings = new JsonSerializerSettings
 		{

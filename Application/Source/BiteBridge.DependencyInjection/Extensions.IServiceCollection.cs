@@ -80,12 +80,19 @@ public static partial class Extensions
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        return services;
-    }
+		return services;
+	}
+	private static IServiceCollection InfrastructureServices(IServiceCollection services, IConfiguration configuration)
+	{
+		services.AddTransient<IExceptionLogger, DbExceptionLogger>();
+		return services;
+	}
 
-    private static IServiceCollection InfrastructureServices(IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddTransient<IExceptionLogger, DbExceptionLogger>();
+	private static IServiceCollection ApplicationPipelineBehaviors(IServiceCollection services)
+	{
+		services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+		services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+		services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceMonitoringBehavior<,>));
 
         return services;
     }

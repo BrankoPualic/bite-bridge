@@ -1,6 +1,4 @@
-﻿using BiteBridge.Common.Extensions;
-
-namespace BiteBridge.Common.Extensions;
+﻿namespace BiteBridge.Common.Extensions;
 
 public static class EnumExtensions
 {

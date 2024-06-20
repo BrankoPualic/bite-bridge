@@ -1,6 +1,7 @@
 export enum eSystemRole {
-	Admin = 1,
+	Administrator = 1,
 	UserAdmin = 2,
 	Moderator = 3,
-	Member = 4
+	Member = 4,
+	Chef = 5
 }
