@@ -18,6 +18,7 @@ public abstract partial class AuditableEntity
 
 	public virtual void Create()
 	{
+		Id = Guid.NewGuid();
 		CreatedOn = DateTime.UtcNow;
 		IsActive = true;
 	}

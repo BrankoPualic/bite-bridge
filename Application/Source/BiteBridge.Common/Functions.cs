@@ -9,4 +9,9 @@ public static class Functions
 	{
 		return enumList.Select(_ => _.ToString()).ToArray();
 	}
+
+	public static string GetUserFullName(string firstName, string lastName, string? middleName)
+	{
+		return string.Join(" ", firstName, middleName, lastName);
+	}
 }

@@ -2,6 +2,11 @@ export interface IAuthorizationDto
 {
 	token: string;
 }
+export interface ISigninDto
+{
+	email: string;
+	password: string;
+}
 export interface ISignupDto
 {
 	firstName: string;

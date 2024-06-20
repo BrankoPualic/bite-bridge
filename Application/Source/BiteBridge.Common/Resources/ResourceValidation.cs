@@ -13,4 +13,5 @@ public static class ResourceValidation
 	public static string Entity_Already_Exist => "Entity already exist.";
 	public static string Phone_Number => "Phone number must be in format 333-333-3333.";
 	public static string Zip_Code => "Zip code must be in format 5 digits or 5 digits followed by hypen and 4 more digits.";
+	public static string Wrong_Credentials => "User credentials are wrong. Please try again.";
 }

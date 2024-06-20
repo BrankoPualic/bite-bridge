@@ -25,13 +25,8 @@ public partial class SignupDto
 
 public partial class SignupDto
 {
-	public SignupDto()
-	{
-	}
-
 	public void ToModel(User user, IUserManager userManager)
 	{
-		user.Id = Guid.NewGuid();
 		user.FirstName = FirstName;
 		user.LastName = LastName;
 		user.Email = Email;

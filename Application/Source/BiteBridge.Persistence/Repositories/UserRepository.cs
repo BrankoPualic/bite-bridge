@@ -12,10 +12,17 @@ public class UserRepository : RepositoryContext, IUserRepository
 	{
 	}
 
-	public void Add(User user)
+	public void Add(User user) => _context.Users.Add(user);
+
+	public async Task<User> GetUserByEmailAsync(string email, CancellationToken cancellationToken = default)
 	{
-		_context.Users.Add(user);
+		return await _context.Users
+			.Include(_ => _.UserRoles)
+			.ThenInclude(_ => _.Role)
+			.SingleOrDefaultAsync(_ => _.Email.Equals(email), cancellationToken);
 	}
+
+	public void LogSignin(SigninLog log) => _context.SigninLogs.Add(log);
 
 	public async Task<bool> UserExistAsync(string email, CancellationToken cancellationToken = default)
 	{
