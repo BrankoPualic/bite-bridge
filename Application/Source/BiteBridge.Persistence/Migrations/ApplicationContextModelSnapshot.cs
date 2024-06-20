@@ -74,7 +74,7 @@ namespace BiteBridge.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ErrorLogs");
+                    b.ToTable("ErrorLogs", (string)null);
                 });
 
             modelBuilder.Entity("BiteBridge.Domain.Entities.Application.Category", b =>

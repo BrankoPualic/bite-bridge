@@ -1,6 +1,8 @@
 ﻿using BiteBridge.Domain.Entities._Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace BiteBridge.Persistence.Contexts;
 
@@ -10,12 +12,6 @@ public partial class ApplicationContext : DbContext
 
     public ApplicationContext()
     {
-        _connectionString = "SERVER=DESKTOP-0TO9QCF; DATABASE=BiteBridge; USER ID=Branko-Obrad-Local; PASSWORD=fWp8M9V6mpMUMd; TrustServerCertificate=true;";
-    }
-
-    public ApplicationContext(string connectionString) : base()
-    {
-        _connectionString = connectionString;
     }
 
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
@@ -26,7 +22,11 @@ public partial class ApplicationContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(_connectionString);
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddUserSecrets(Assembly.GetExecutingAssembly())
+                .Build();
+
+            optionsBuilder.UseSqlServer(configuration["LOCAL_DEV_DB_CONNECTION"]);
         }
 
         base.OnConfiguring(optionsBuilder);
