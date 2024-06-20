@@ -43,7 +43,7 @@ namespace BiteBridge.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ErrorLogs");
+                    b.ToTable("ErrorLogs", (string)null);
                 });
 #pragma warning restore 612, 618
         }

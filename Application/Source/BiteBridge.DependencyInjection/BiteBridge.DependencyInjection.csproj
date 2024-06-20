@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<UserSecretsId>ff99550f-9c5b-40cf-a1c7-a7b303746ab7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,7 @@
     <ProjectReference Include="..\BiteBridge.Application.Identity\BiteBridge.Application.Identity.csproj" />
     <ProjectReference Include="..\BiteBridge.Application\BiteBridge.Application.csproj" />
     <ProjectReference Include="..\BiteBridge.Domain\BiteBridge.Domain.csproj" />
+    <ProjectReference Include="..\BiteBridge.Infrastructure\BiteBridge.Infrastructure.csproj" />
     <ProjectReference Include="..\BiteBridge.Persistence\BiteBridge.Persistence.csproj" />
     <ProjectReference Include="..\BiteBridge.Common\BiteBridge.Common.csproj" />
   </ItemGroup>
