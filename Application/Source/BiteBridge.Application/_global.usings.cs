@@ -1,0 +1,15 @@
+﻿global using AutoMapper;
+global using BiteBridge.Application.BusinessLogic._Base;
+global using BiteBridge.Application.Exceptions;
+global using BiteBridge.Application.Identity.Interfaces;
+global using BiteBridge.Common;
+global using BiteBridge.Common.Enums;
+global using BiteBridge.Common.Exceptions;
+global using BiteBridge.Common.Extensions;
+global using BiteBridge.Common.Interfaces;
+global using BiteBridge.Common.Resources;
+global using BiteBridge.Domain.Entities.Application;
+global using BiteBridge.Domain.Repositories;
+global using FluentValidation;
+global using MediatR;
+global using Microsoft.Extensions.Logging;

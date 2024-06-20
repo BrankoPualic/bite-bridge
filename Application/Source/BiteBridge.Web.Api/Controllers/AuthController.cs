@@ -17,4 +17,8 @@ public class AuthController : BaseController
 	[HttpPost]
 	[AngularMethod(typeof(AuthorizationDto))]
 	public async Task<IActionResult> Signup(SignupDto user) => Ok(await Mediator.Send(new SignupCommand(user)));
+
+	[HttpPost]
+	[AngularMethod(typeof(AuthorizationDto))]
+	public async Task<IActionResult> Signin(SigninDto user) => Ok(await Mediator.Send(new SigninCommand(user)));
 }

@@ -1,31 +1,11 @@
-﻿using AutoMapper;
-using BiteBridge.Application.BusinessLogic._Base;
-using BiteBridge.Application.Dtos.Users;
+﻿using BiteBridge.Application.Dtos.Users;
 using BiteBridge.Application.Dtos.Users.Authorization;
-using BiteBridge.Application.Exceptions;
-using BiteBridge.Application.Identity.Interfaces;
-using BiteBridge.Common;
-using BiteBridge.Common.Enums;
-using BiteBridge.Common.Exceptions;
-using BiteBridge.Common.Extensions;
-using BiteBridge.Common.Interfaces;
-using BiteBridge.Common.Resources;
-using BiteBridge.Domain.Entities.Application;
-using BiteBridge.Domain.Repositories;
-using FluentValidation;
-using MediatR;
-using Microsoft.Extensions.Logging;
 
 namespace BiteBridge.Application.BusinessLogic.Users.Commands;
 
-public class SignupCommand : BaseCommand<AuthorizationDto>
+public class SignupCommand(SignupDto user) : BaseCommand<AuthorizationDto>
 {
-	public SignupDto User { get; set; }
-
-	public SignupCommand(SignupDto user)
-	{
-		User = user;
-	}
+	public SignupDto User { get; set; } = user;
 }
 
 public class SignupCommandValidator : AbstractValidator<SignupCommand>
@@ -122,8 +102,8 @@ internal class SignupCommandHandler : BaseCommandHandler<SignupCommand, Authoriz
 	private readonly ITokenService _tokenService;
 	private readonly IUserManager _userManager;
 
-	public SignupCommandHandler(IUnitOfWork unitOfWork, IMapper mapper = null, IIdentityUser identityUser = null, IMediator mediator = null, ILogger logger = null, ITokenService tokenService = null, IUserManager userManager = null)
-		: base(unitOfWork, mapper, identityUser, mediator, logger)
+	public SignupCommandHandler(IUnitOfWork unitOfWork, ITokenService tokenService, IUserManager userManager)
+		: base(unitOfWork)
 	{
 		_tokenService = tokenService;
 		_userManager = userManager;
@@ -131,9 +111,9 @@ internal class SignupCommandHandler : BaseCommandHandler<SignupCommand, Authoriz
 
 	public override async Task<AuthorizationDto> Handle(SignupCommand request, CancellationToken cancellationToken)
 	{
-		bool user_exist = await _unitOfWork.UserRepository.UserExistAsync(request.User.Email, cancellationToken);
+		bool userExist = await _unitOfWork.UserRepository.UserExistAsync(request.User.Email, cancellationToken);
 
-		if (user_exist)
+		if (userExist)
 		{
 			throw new FluentValidationException(nameof(request.User.Email), ResourceValidation.Entity_Already_Exist.AppendArgument("User"));
 		}
@@ -150,7 +130,7 @@ internal class SignupCommandHandler : BaseCommandHandler<SignupCommand, Authoriz
 				Token = _tokenService.GenerateJwtToken(
 				user.Id,
 				Functions.GetStringValuesFromEnums(eSystemRole.Member),
-				string.Join(" ", user.FirstName, user.MiddleName, user.LastName),
+				Functions.GetUserFullName(user.FirstName, user.LastName, user.MiddleName),
 				user.Email)
 			}
 			: throw new ServerException();
