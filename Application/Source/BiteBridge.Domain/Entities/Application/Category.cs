@@ -3,9 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BiteBridge.Domain.Entities.Application;
 
-public class Category : Entity_lu
+public class Category
 {
+    public int Id { get; set; }
     public int? ParentId { get; set; }
+    public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
 
     [ForeignKey(nameof(ParentId))]
