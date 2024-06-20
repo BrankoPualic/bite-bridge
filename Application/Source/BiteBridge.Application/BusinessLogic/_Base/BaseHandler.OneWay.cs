@@ -1,5 +1,6 @@
 ﻿using BiteBridge.Common.Enums;
 using BiteBridge.Common.Interfaces;
+using BiteBridge.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -8,6 +9,24 @@ namespace BiteBridge.Application.BusinessLogic._Base;
 public abstract class BaseHandler<TRequest> : IRequestHandler<TRequest>
 	where TRequest : IRequest
 {
+	protected readonly IUnitOfWork _unitOfWork;
+	protected IIdentityUser _identityUser;
+
+	protected BaseHandler()
+	{
+	}
+
+	protected BaseHandler(IUnitOfWork unitOfWork) : this()
+	{
+		_unitOfWork = unitOfWork;
+	}
+
+	protected BaseHandler(IUnitOfWork unitOfWork, IIdentityUser identityUser = null)
+		: this(unitOfWork)
+	{
+		_identityUser = identityUser;
+	}
+
 	public abstract Task Handle(TRequest request, CancellationToken cancellationToken);
 
 	protected bool TryRun(Action action, ILogger logger)
@@ -40,7 +59,7 @@ public abstract class BaseHandler<TRequest> : IRequestHandler<TRequest>
 
 	protected void CheckUserAuthorization(IIdentityUser user, params eSystemRole[] requiredRoles)
 	{
-		if (!user.IsAuthenticated || !user.Roles.Any(role => requiredRoles.Contains(role)))
+		if (!user.IsAuthenticated || !user.HasRole([.. requiredRoles]))
 		{
 			throw new UnauthorizedAccessException();
 		}

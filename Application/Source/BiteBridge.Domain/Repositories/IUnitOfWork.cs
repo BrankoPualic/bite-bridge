@@ -5,16 +5,12 @@ public interface IUnitOfWork
 	#region Repositories
 
 	IErrorLogRepository ErrorLogRepository { get; }
+	IUserRepository UserRepository { get; }
+	IUserRoleRepository UserRoleRepository { get; }
 
 	#endregion Repositories
 
 	#region Methods
-
-	void BeginTransaction();
-
-	Task CommitTransactionAsync(CancellationToken cancellationToken = default);
-
-	Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
 
 	Task<bool> Save();
 

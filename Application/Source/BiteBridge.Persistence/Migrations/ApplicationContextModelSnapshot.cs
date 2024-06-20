@@ -196,6 +196,33 @@ namespace BiteBridge.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("SystemRoles_lu");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Administrator"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "UserAdmin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Moderator"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Member"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Chef"
+                        });
                 });
 
             modelBuilder.Entity("BiteBridge.Domain.Entities.Application.UserRole", b =>

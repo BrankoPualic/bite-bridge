@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BiteBridge.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240619191721_BB2_Auth_UserAndRoles")]
+    [Migration("20240620062801_BB2_Auth_UserAndRoles")]
     partial class BB2_Auth_UserAndRoles
     {
         /// <inheritdoc />
@@ -154,6 +154,33 @@ namespace BiteBridge.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("SystemRoles_lu");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Administrator"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "UserAdmin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Moderator"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Member"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Chef"
+                        });
                 });
 
             modelBuilder.Entity("BiteBridge.Domain.Entities.Application.UserRole", b =>

@@ -10,35 +10,22 @@ public class UnitOfWork : RepositoryContext, IUnitOfWork
 	{
 	}
 
-	public IErrorLogRepository ErrorLogRepository => throw new NotImplementedException();
+	#region Repositories
 
-	public void BeginTransaction()
-	{
-		if (_context.Database.CurrentTransaction is null)
-		{
-			_context.Database.BeginTransaction();
-		}
-	}
+	public IErrorLogRepository ErrorLogRepository => new ErrorLogRepository(_context);
 
-	public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
-	{
-		if (_context.Database.CurrentTransaction is not null)
-		{
-			await _context.SaveChangesAsync(cancellationToken);
-			await _context.Database.CurrentTransaction.CommitAsync(cancellationToken);
-		}
-	}
+	public IUserRepository UserRepository => new UserRepository(_context);
 
-	public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-	{
-		if (_context.Database.CurrentTransaction is not null)
-		{
-			await _context.Database.CurrentTransaction.RollbackAsync(cancellationToken);
-		}
-	}
+	public IUserRoleRepository UserRoleRepository => new UserRoleRepository(_context);
+
+	#endregion Repositories
+
+	#region Methods
 
 	public async Task<bool> Save()
 	{
 		return await _context.SaveChangesAsync() > 0;
 	}
+
+	#endregion Methods
 }

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace BiteBridge.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -70,6 +72,18 @@ namespace BiteBridge.Persistence.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "SystemRoles_lu",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Administrator" },
+                    { 2, "UserAdmin" },
+                    { 3, "Moderator" },
+                    { 4, "Member" },
+                    { 5, "Chef" }
                 });
 
             migrationBuilder.CreateIndex(

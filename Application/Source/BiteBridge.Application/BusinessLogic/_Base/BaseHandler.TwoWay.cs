@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using BiteBridge.Common.Enums;
 using BiteBridge.Common.Interfaces;
+using BiteBridge.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Linq;
 
 namespace BiteBridge.Application.BusinessLogic._Base;
 
@@ -12,6 +12,7 @@ public abstract class BaseHandler<TRequest, TResponse> : IRequestHandler<TReques
 {
 	#region Fields
 
+	protected readonly IUnitOfWork _unitOfWork;
 	protected readonly IMediator _mediator;
 	protected readonly IMapper _mapper;
 	protected IIdentityUser _identityUser;
@@ -23,18 +24,24 @@ public abstract class BaseHandler<TRequest, TResponse> : IRequestHandler<TReques
 	{
 	}
 
-	//protected BaseHandler(IUnitOfWork unitOfWork) : this()
-	//{
-	//}
+	protected BaseHandler(IUnitOfWork unitOfWork) : this()
+	{
+		_unitOfWork = unitOfWork;
+	}
 
-	//protected BaseHandler(IUnitOfWork unitOfWork, IMapper mapper = null, IIdentityUser identityUser = null, IMediator mediator = null, ILogger logger = null)
-	//	: this(unitOfWork)
-	//   {
-	//       _mediator = mediator;
-	//	_mapper = mapper;
-	//	_identityUser = identityUser;
-	//	_logger = logger;
-	//   }
+	protected BaseHandler(IUnitOfWork unitOfWork, IIdentityUser identityUser = null)
+		: this(unitOfWork)
+	{
+		_identityUser = identityUser;
+	}
+
+	protected BaseHandler(IUnitOfWork unitOfWork, IMapper mapper = null, IIdentityUser identityUser = null, IMediator mediator = null, ILogger logger = null)
+		: this(unitOfWork, identityUser)
+	{
+		_mediator = mediator;
+		_mapper = mapper;
+		_logger = logger;
+	}
 
 	public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
 
@@ -68,7 +75,7 @@ public abstract class BaseHandler<TRequest, TResponse> : IRequestHandler<TReques
 
 	protected void CheckUserAuthorization(IIdentityUser user, params eSystemRole[] requiredRoles)
 	{
-		if (!user.IsAuthenticated || !user.Roles.Any(role => requiredRoles.Contains(role)))
+		if (!user.IsAuthenticated || !user.HasRole([.. requiredRoles]))
 		{
 			throw new UnauthorizedAccessException();
 		}
