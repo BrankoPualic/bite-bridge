@@ -116,6 +116,19 @@ public class CategorySeed : ISeedData<Category>
 
                 // Subcategories under "Food Types"
                 new() { Id = 77, ParentId = 76, Name = "Seafood", Description = "Various seafood dishes including fish, shrimp, etc." },
+
+                    // Subcategories under "Seafood"
+                    new() { Id = 114, ParentId = 77, Name = "Fish", Description = "Various fish dishes including grilled fish, fish and chips, etc." },
+                    new() { Id = 115, ParentId = 77, Name = "Shrimp", Description = "Various shrimp dishes including shrimp cocktail, shrimp scampi, etc." },
+                    new() { Id = 116, ParentId = 77, Name = "Crab", Description = "Various crab dishes including crab cakes, crab legs, etc." },
+                    new() { Id = 117, ParentId = 77, Name = "Lobster", Description = "Various lobster dishes including lobster rolls, grilled lobster, etc." },
+                    new() { Id = 118, ParentId = 77, Name = "Oysters", Description = "Various oyster dishes including raw oysters, fried oysters, etc." },
+                    new() { Id = 119, ParentId = 77, Name = "Clams", Description = "Various clam dishes including clam chowder, steamed clams, etc." },
+                    new() { Id = 120, ParentId = 77, Name = "Mussels", Description = "Various mussel dishes including steamed mussels, mussels marinara, etc." },
+                    new() { Id = 121, ParentId = 77, Name = "Scallops", Description = "Various scallop dishes including seared scallops, scallop pasta, etc." },
+                    new() { Id = 122, ParentId = 77, Name = "Octopus", Description = "Various octopus dishes including grilled octopus, octopus salad, etc." },
+                    new() { Id = 123, ParentId = 77, Name = "Squid", Description = "Various squid dishes including calamari, stuffed squid, etc." },
+
                 new() { Id = 78, ParentId = 76, Name = "Pasta", Description = "Italian pasta dishes including spaghetti, lasagna, etc." },
                 new() { Id = 79, ParentId = 76, Name = "Pizza", Description = "Different types of pizzas including Margherita, Pepperoni, etc." },
                 new() { Id = 80, ParentId = 76, Name = "Burgers", Description = "Various burger options including cheeseburgers, veggie burgers, etc." },
@@ -123,8 +136,27 @@ public class CategorySeed : ISeedData<Category>
                 new() { Id = 82, ParentId = 76, Name = "Soups", Description = "Different soup varieties including chicken noodle soup, tomato soup, etc." },
                 new() { Id = 83, ParentId = 76, Name = "Sandwiches", Description = "Various sandwich options including club sandwich, BLT, etc." },
                 new() { Id = 84, ParentId = 76, Name = "Grilled", Description = "Grilled food items including grilled chicken, grilled vegetables, etc." },
-                new() { Id = 85, ParentId = 76, Name = "Steak", Description = "Different cuts of steak including ribeye, sirloin, etc." },
-                new() { Id = 86, ParentId = 76, Name = "Chicken", Description = "Various chicken dishes including roasted chicken, chicken wings, etc." },
+                new() { Id = 102, ParentId = 76, Name = "Carnivore", Description = "Various meat dishes including chicken, beef, pork, turkey, etc." },
+
+                    // Subcategories under "Carnivore"
+                     new() { Id = 86, ParentId = 102, Name = "Chicken", Description = "Various chicken dishes including roasted chicken, chicken wings, etc." },
+                    new() { Id = 85, ParentId = 102, Name = "Beef", Description = "Various beef dishes including steak, beef stew, etc." },
+                    new() { Id = 103, ParentId = 102, Name = "Pork", Description = "Various pork dishes including pork chops, pulled pork, etc." },
+                    new() { Id = 104, ParentId = 102, Name = "Turkey", Description = "Various turkey dishes including roasted turkey, turkey sandwiches, etc." },
+                    new() { Id = 105, ParentId = 102, Name = "Lamb", Description = "Various lamb dishes including lamb chops, lamb stew, etc." },
+                    new() { Id = 106, ParentId = 102, Name = "Duck", Description = "Various duck dishes including roasted duck, duck confit, etc." },
+                    new() { Id = 107, ParentId = 102, Name = "Game Meat", Description = "Various game meats including venison, bison, rabbit, etc." },
+
+                        // Subcategories under "Game Meat"
+                        new() { Id = 108, ParentId = 107, Name = "Venison", Description = "Deer meat including steaks, sausages, and stews." },
+                        new() { Id = 109, ParentId = 107, Name = "Bison", Description = "Bison meat including burgers, steaks, and roasts." },
+                        new() { Id = 110, ParentId = 107, Name = "Rabbit", Description = "Rabbit meat including stews, roasts, and pies." },
+                        new() { Id = 111, ParentId = 107, Name = "Wild Boar", Description = "Wild boar meat including sausages, roasts, and stews." },
+                        new() { Id = 112, ParentId = 107, Name = "Pheasant", Description = "Pheasant meat including roasted, grilled, and stews." },
+                        new() { Id = 113, ParentId = 107, Name = "Quail", Description = "Quail meat including roasted, grilled, and stews." },
+                        new() { Id = 112, ParentId = 107, Name = "Alligator", Description = "Alligator meat including fried, grilled, and stews." },
+                        new() { Id = 113, ParentId = 107, Name = "Kangaroo", Description = "Kangaroo meat including steaks, sausages, and stews." },
+
                 new() { Id = 87, ParentId = 76, Name = "Rice Dishes", Description = "Different rice-based dishes including biryani, risotto, etc." },
                 new() { Id = 88, ParentId = 76, Name = "Noodles", Description = "Various noodle dishes including ramen, pad Thai, etc." },
                 new() { Id = 89, ParentId = 76, Name = "Sushi", Description = "Japanese sushi rolls including nigiri, sashimi, etc." },

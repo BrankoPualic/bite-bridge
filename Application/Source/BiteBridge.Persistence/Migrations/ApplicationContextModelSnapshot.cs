@@ -729,21 +729,7 @@ namespace BiteBridge.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ErrorLogs");
-                });
-
-            modelBuilder.Entity("BiteBridge.Domain.Entities.Application.Category", b =>
-                {
-                    b.HasOne("BiteBridge.Domain.Entities.Application.Category", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("BiteBridge.Domain.Entities.Application.Category", b =>
-                {
-                    b.Navigation("Children");
+                    b.ToTable("ErrorLogs", (string)null);
                 });
 
             modelBuilder.Entity("BiteBridge.Domain.Entities.Application.SigninLog", b =>
@@ -760,7 +746,7 @@ namespace BiteBridge.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SigninLogs");
+                    b.ToTable("SigninLogs", (string)null);
                 });
 
             modelBuilder.Entity("BiteBridge.Domain.Entities.Application.User", b =>
@@ -831,7 +817,7 @@ namespace BiteBridge.Persistence.Migrations
 
                     SqlServerIndexBuilderExtensions.IncludeProperties(b.HasIndex("FirstName", "MiddleName", "LastName"), new[] { "DateOfBirth" });
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BiteBridge.Domain.Entities.Application.UserRole", b =>
@@ -846,7 +832,7 @@ namespace BiteBridge.Persistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("BiteBridge.Domain.Entities.Application_lu.SystemRole_lu", b =>
@@ -867,7 +853,7 @@ namespace BiteBridge.Persistence.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("SystemRoles_lu");
+                    b.ToTable("SystemRoles_lu", (string)null);
 
                     b.HasData(
                         new
