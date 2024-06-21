@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,6 +10,10 @@ import { Constants } from '../../../constants';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommonModule } from '@angular/common';
 import { BasePageClass } from '../../_base/base-page';
+import { ISigninDto } from '../../../_generated/interfaces';
+import { AuthService } from '../../../services/auth.service';
+import { PageLoaderService } from '../../../services/page-loader.service';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-signin',
   standalone: true,
@@ -17,11 +21,20 @@ import { BasePageClass } from '../../_base/base-page';
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss',
 })
-export class SigninComponent extends BasePageClass implements OnInit {
+export class SigninComponent
+  extends BasePageClass
+  implements OnInit, OnDestroy
+{
   signinForm: FormGroup = this.fb.group({});
   formSubmited = false;
+  signinErrors: string[] = [];
 
-  constructor(private fb: FormBuilder, private renderer: Renderer2) {
+  constructor(
+    private fb: FormBuilder,
+    private renderer: Renderer2,
+    private authService: AuthService,
+    private pageLoader: PageLoaderService
+  ) {
     super();
   }
 
@@ -37,6 +50,10 @@ export class SigninComponent extends BasePageClass implements OnInit {
     this.initializeSigninForm();
   }
 
+  ngOnDestroy(): void {
+    this.signinErrors = [];
+  }
+
   toggleEyeIcon(icon: HTMLElement, passwordField: HTMLInputElement) {
     if (icon.classList.contains('pi-eye')) {
       this.renderer.removeClass(icon, 'pi-eye');
@@ -49,8 +66,24 @@ export class SigninComponent extends BasePageClass implements OnInit {
     }
   }
 
-  signin() {
+  async signin() {
     this.formSubmited = true;
+    if (this.signinForm.invalid) {
+      return;
+    }
+
+    const signinUser: ISigninDto = this.signinForm.value;
+
+    try {
+      this.pageLoader.showLoader();
+      await this.authService.signin(signinUser).toResult();
+    } catch (ex) {
+      const errors: string[] = (ex as HttpErrorResponse).error.error.user;
+      this.signinErrors = errors;
+      throw ex;
+    } finally {
+      this.pageLoader.hideLoader();
+    }
   }
 
   private initializeSigninForm() {

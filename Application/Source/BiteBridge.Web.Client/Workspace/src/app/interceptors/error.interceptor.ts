@@ -28,7 +28,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             router.navigateByUrl('/not-found');
             break;
           case 422:
-            toast.showError('Validation error', error.message);
+            toast.showError('Validation error', error.error.message);
             break;
           default:
             toast.showGeneralError();

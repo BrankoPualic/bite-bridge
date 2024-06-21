@@ -7,7 +7,7 @@
   </div>
   <div class="px-5 w-40">
     <h2>Sign in</h2>
-    <form [formGroup]="signinForm" (ngSubmit)="signin()" class="w-90">
+    <form [formGroup]="signinForm" (ngSubmit)="signin()" class="w-90 relative">
       <div class="d-flex flex-column gap-2 my-4">
         <label for="email">Email Address</label>
         <div class="relative">
@@ -77,6 +77,11 @@
         </div>
       </div>
       <input type="submit" class="btn btn-primary btn-lg" value="Sign in" />
+      <div class="validation-feedback">
+        @for (error of signinErrors; track $index) {
+        <p>{{ error }}</p>
+        }
+      </div>
     </form>
   </div>
 </div>
