@@ -4,12 +4,12 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Constants } from '../../../constants';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommonModule } from '@angular/common';
+import { BasePageClass } from '../../_base/base-page';
 @Component({
   selector: 'app-signin',
   standalone: true,
@@ -17,11 +17,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss',
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent extends BasePageClass implements OnInit {
   signinForm: FormGroup = this.fb.group({});
   formSubmited = false;
 
-  constructor(private fb: FormBuilder, private renderer: Renderer2) {}
+  constructor(private fb: FormBuilder, private renderer: Renderer2) {
+    super();
+  }
 
   get emailErrors() {
     return this.signinForm.get('email')?.errors;
@@ -49,35 +51,6 @@ export class SigninComponent implements OnInit {
 
   signin() {
     this.formSubmited = true;
-  }
-
-  getErrorMessages(errors?: ValidationErrors | null) {
-    if (!errors) return [];
-
-    return Object.keys(errors).map((key) => {
-      switch (key) {
-        case Constants.VALIDATION_TYPE_REQUIRED:
-          return Constants.VALIDATION_REQUIRED;
-        case Constants.VALIDATION_TYPE_EMAIL:
-          return Constants.VALIDATION_EMAIL;
-        case Constants.VALIDATION_TYPE_PATTERN:
-          return this.getPatternErrorMessage(errors[key]);
-        case Constants.VALIDATION_TYPE_MAX_LENGTH:
-          return Constants.VALIDATION_MAX_LENGTH.appendArgument(
-            errors[key].requiredLength
-          );
-        default:
-          return '';
-      }
-    });
-  }
-
-  private getPatternErrorMessage(patternError: any) {
-    const { requiredPattern } = patternError;
-    if (requiredPattern === Constants.REGEX_PASSWORD.toString()) {
-      return Constants.VALIDATION_PASSWORD;
-    }
-    return '';
   }
 
   private initializeSigninForm() {
