@@ -1,1 +1,82 @@
-<p>signin works!</p>
+<div class="d-flex align-items-center w-100">
+  <div class="w-60 full-page-height">
+    <img
+      src="https://res-console.cloudinary.com/dhryqnufr/thumbnails/v1/image/upload/v1718909825/Yml0ZS1icmlkZ2Uvc2lnbmluX2ltYWdlX2ViYWVnZQ==/drilldown"
+      alt=""
+    />
+  </div>
+  <div class="px-5 w-40">
+    <h2>Sign in</h2>
+    <form [formGroup]="signinForm" (ngSubmit)="signin()" class="w-90">
+      <div class="d-flex flex-column gap-2 my-4">
+        <label for="email">Email Address</label>
+        <div class="relative">
+          @if(signinForm.invalid && formSubmited &&
+          getErrorMessages(emailErrors).length > 0){
+          <i
+            class="pi pi-exclamation-circle validation-input-icon"
+            [pTooltip]="tooltipContent"
+            tooltipStyleClass="validation-tooltip"
+            tooltipPosition="left"
+          ></i>
+          <ng-template #tooltipContent>
+            @for(error of getErrorMessages(emailErrors); track $index){
+            {{ error }}
+            }
+          </ng-template>
+          }
+          <input
+            class="form-control"
+            id="email"
+            formControlName="email"
+            [ngClass]="{
+              'input-invalid':
+                signinForm.invalid &&
+                formSubmited &&
+                getErrorMessages(passwordErrors).length > 0
+            }"
+          />
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-2 mb-4">
+        <label for="password">Password</label>
+        <div class="relative">
+          @if(signinForm.invalid && formSubmited &&
+          getErrorMessages(passwordErrors).length > 0){
+          <i
+            class="pi pi-exclamation-circle validation-input-icon"
+            [pTooltip]="tooltipContent"
+            tooltipStyleClass="validation-tooltip"
+            tooltipPosition="left"
+          ></i>
+          <ng-template #tooltipContent>
+            @for(error of getErrorMessages(passwordErrors); track $index){
+            {{ error }}
+            }
+          </ng-template>
+          }
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control align-items-center"
+            #password
+            [ngClass]="{
+              'input-invalid':
+                signinForm.invalid &&
+                formSubmited &&
+                getErrorMessages(passwordErrors).length > 0
+            }"
+          />
+
+          <i
+            class="pi pi-eye pointer right-input-icon"
+            #eye
+            (click)="toggleEyeIcon(eye, password)"
+          ></i>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary btn-lg" value="Sign in" />
+    </form>
+  </div>
+</div>

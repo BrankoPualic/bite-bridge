@@ -1,0 +1,50 @@
+// Password
+
+// .p-password-mask {
+//   .p-password {
+//     align-items: center;
+//     width: 100%;
+
+//     .p-icon-wrapper {
+//       top: unset;
+//     }
+
+//     .p-password-panel {
+//       z-index: 1002;
+//       transform-origin: center top;
+//       top: 33px;
+//       left: 0px;
+//       margin-top: calc(var(--p-anchor-gutter));
+//       min-width: 100%;
+
+//       background-color: #ffffff;
+//       border: 1px solid #e2e8f0;
+//       padding: 0.75rem;
+//       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+//         0 2px 4px -2px rgba(0, 0, 0, 0.1);
+//       border-radius: 6px;
+
+//       .p-password-meter {
+//         margin-bottom: 0.75rem;
+//         border-radius: 6px;
+//         height: 10px;
+
+//         .p-password-strength {
+//           border-radius: 6px;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// Tooltip
+
+.validation-tooltip {
+  .p-tooltip-text {
+    background: $light-red;
+  }
+
+  .p-tooltip-arrow {
+    border-left-color: $light-red;
+  }
+}

@@ -10,6 +10,9 @@ import { jwtInterceptor } from './interceptors/jwt.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { MessageService } from 'primeng/api';
 
+import './extensions/string-extension';
+import './extensions/observable-extension';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
