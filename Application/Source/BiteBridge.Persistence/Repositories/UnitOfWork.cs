@@ -18,6 +18,8 @@ public class UnitOfWork : RepositoryContext, IUnitOfWork
 
 	public IUserRoleRepository UserRoleRepository => new UserRoleRepository(_context);
 
+	public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
+
 	#endregion Repositories
 
 	#region Methods

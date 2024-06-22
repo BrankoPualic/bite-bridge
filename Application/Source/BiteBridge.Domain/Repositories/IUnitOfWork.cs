@@ -7,6 +7,7 @@ public interface IUnitOfWork
 	IErrorLogRepository ErrorLogRepository { get; }
 	IUserRepository UserRepository { get; }
 	IUserRoleRepository UserRoleRepository { get; }
+	ICategoryRepository CategoryRepository { get; }
 
 	#endregion Repositories
 

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { IAuthorizationDto } from './interfaces';
 import { ISignupDto } from './interfaces';
 import { ISigninDto } from './interfaces';
+import { ICategoryResponseDto } from './interfaces';
 
 @Injectable() export abstract class BaseController
 {
@@ -33,6 +34,25 @@ import { ISigninDto } from './interfaces';
 		return this.httpClient.post<IAuthorizationDto>(
 		this.settingsService.createApiUrl('Auth/Signin'),
 		body,
+		{
+			responseType: 'json',
+			observe: 'response',
+			withCredentials: true
+		})
+		.pipe(map(response => response.body));
+		
+	}
+	constructor (httpClient: HttpClient, settingsService: SettingsService)
+	{
+		super(httpClient, settingsService);
+	}
+}
+@Injectable() export class CategoryController extends BaseController
+{
+	public GetAll() : Observable<ICategoryResponseDto[] | null>
+	{
+		return this.httpClient.get<ICategoryResponseDto[]>(
+		this.settingsService.createApiUrl('Category/GetAll'),
 		{
 			responseType: 'json',
 			observe: 'response',

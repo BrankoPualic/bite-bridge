@@ -2,6 +2,13 @@ export interface IAuthorizationDto
 {
 	token: string;
 }
+export interface ICategoryResponseDto
+{
+	id: number;
+	name: string;
+	parentId?: number;
+	subCategories?: ICategoryResponseDto[];
+}
 export interface ISigninDto
 {
 	email: string;
