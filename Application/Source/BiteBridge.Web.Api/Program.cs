@@ -5,21 +5,6 @@ using BiteBridge.Web.Api.Objects;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowedCrossOrigins",
-        builder =>
-        {
-            builder.WithOrigins
-                (
-                    "https://localhost:4200",
-                    "http://localhost:4200"
-                )
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-        });
-});
-
 builder.Services.AllApplicationServices(builder.Configuration);
 
 builder.Services.AddControllers();
@@ -29,7 +14,12 @@ builder.Services.AddScoped<IIdentityUser, IdentityUser>();
 
 var app = builder.Build();
 
-app.UseCors("AllowedCrossOrigins");
+app.UseCors(builder => builder
+	.AllowAnyHeader()
+	.AllowAnyMethod()
+	.AllowCredentials()
+	.WithOrigins("https://localhost:4200")
+	);
 
 app.UseHttpsRedirection();
 app.UseRouting();

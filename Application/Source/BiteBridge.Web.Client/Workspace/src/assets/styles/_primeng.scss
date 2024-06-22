@@ -1,0 +1,21 @@
+// Password
+
+.p-inputwrapper {
+  width: 100%;
+  display: flex;
+  .p-password {
+    width: 100%;
+  }
+}
+
+// Tooltip
+
+.validation-tooltip {
+  .p-tooltip-text {
+    background: $light-red;
+  }
+
+  .p-tooltip-arrow {
+    border-left-color: $light-red;
+  }
+}

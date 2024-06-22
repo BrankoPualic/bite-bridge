@@ -1,0 +1,96 @@
+<div class="d-flex align-items-center w-100">
+  <div class="w-60 full-page-height relative">
+    <div class="auth-page-text">
+      <h1>Welcome to BiteBridge: Your Meal Box Subscription</h1>
+      <p>
+        BiteBridge is a place where healthy eating meets convenience.
+        <strong>Sign in</strong> to access your subscription, track your meal
+        preferences, and discover new features that make meal planning a breeze.
+      </p>
+    </div>
+    <img
+      src="https://res-console.cloudinary.com/dhryqnufr/thumbnails/v1/image/upload/v1718909825/Yml0ZS1icmlkZ2Uvc2lnbmluX2ltYWdlX2ViYWVnZQ==/drilldown"
+      alt=""
+    />
+  </div>
+  <div class="px-5 w-40">
+    <h2>Sign in</h2>
+    <form [formGroup]="signinForm" (ngSubmit)="signin()" class="w-90 relative">
+      <div class="d-flex flex-column gap-2 my-4">
+        <label for="email">Email Address</label>
+        <div class="relative">
+          @if(isFormInvalid(signinForm, formSubmited, emailErrors)){
+          <i
+            class="pi pi-exclamation-circle validation-input-icon"
+            [pTooltip]="tooltipContent"
+            tooltipStyleClass="validation-tooltip"
+            tooltipPosition="left"
+          ></i>
+          <ng-template #tooltipContent>
+            @for(error of getErrorMessages(emailErrors); track $index){
+            {{ error }}
+            }
+          </ng-template>
+          }
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            [ngClass]="{
+              'input-invalid': isFormInvalid(
+                signinForm,
+                formSubmited,
+                emailErrors
+              )
+            }"
+          />
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-2 mb-4">
+        <label for="password">Password</label>
+        <div class="relative">
+          @if(isFormInvalid(signinForm, formSubmited, passwordErrors)){
+          <i
+            class="pi pi-exclamation-circle validation-input-icon"
+            [pTooltip]="tooltipContent"
+            tooltipStyleClass="validation-tooltip"
+            tooltipPosition="left"
+          ></i>
+          <ng-template #tooltipContent>
+            @for(error of getErrorMessages(passwordErrors); track $index){
+            {{ error }}
+            }
+          </ng-template>
+          }
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control align-items-center"
+            #password
+            [ngClass]="{
+              'input-invalid': isFormInvalid(
+                signinForm,
+                formSubmited,
+                passwordErrors
+              )
+            }"
+          />
+
+          <i
+            class="pi pi-eye pointer right-input-icon"
+            #eye
+            (click)="toggleEyeIcon(eye, password)"
+          ></i>
+        </div>
+      </div>
+      <input type="submit" class="btn btn-primary btn-lg" value="Sign in" />
+      <div class="validation-feedback">
+        @for (error of signinErrors; track $index) {
+        <p>{{ error }}</p>
+        }
+      </div>
+    </form>
+  </div>
+</div>
