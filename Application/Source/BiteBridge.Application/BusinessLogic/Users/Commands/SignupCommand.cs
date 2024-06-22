@@ -76,20 +76,20 @@ public class SignupCommandValidator : AbstractValidator<SignupCommand>
 			.When(_ => _.User.OfficeNumber.HasValue())
 			.WithMessage(ResourceValidation.Phone_Number);
 
-		RuleFor(_ => _.User.PrimaryAddress)
+		RuleFor(_ => _.User.Location.PrimaryAddress)
 			.NotEmpty()
 			.WithMessage(ResourceValidation.Required.AppendArgument("Primary Address"));
 
-		RuleFor(_ => _.User.PrimaryAddress)
+		RuleFor(_ => _.User.Location.PrimaryAddress)
 			.NotEmpty()
-			.When(_ => _.User.SecondaryAddress.HasValue())
+			.When(_ => _.User.Location.SecondaryAddress.HasValue())
 			.WithMessage(ResourceValidation.Required.AppendArgument("Secondary Address"));
 
-		RuleFor(_ => _.User.State)
+		RuleFor(_ => _.User.Location.State)
 			.NotEmpty()
 			.WithMessage(ResourceValidation.Required.AppendArgument("State"));
 
-		RuleFor(_ => _.User.ZipCode)
+		RuleFor(_ => _.User.Location.ZipCode)
 			.NotEmpty()
 			.WithMessage(ResourceValidation.Required.AppendArgument("Zip Code"))
 			.Matches(Constants.REGEX_ZIPCODE)
