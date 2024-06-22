@@ -3,6 +3,10 @@
 @import "assets/styles/bootswatch";
 @import "assets/styles/primeng";
 
+body {
+  background-color: $gray-200;
+}
+
 .backdrop {
   position: fixed;
   top: 0;

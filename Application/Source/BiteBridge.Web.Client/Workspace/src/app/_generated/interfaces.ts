@@ -6,6 +6,7 @@ export interface ILocationDto
 {
 	primaryAddress: string;
 	secondaryAddress?: string;
+	city: string;
 	state: string;
 	zipCode: string;
 }

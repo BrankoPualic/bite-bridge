@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { PageLoaderService } from '../../../services/page-loader.service';
 import { PasswordModule } from 'primeng/password';
+import { ISignupDto } from '../../../_generated/interfaces';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -31,7 +33,6 @@ export class SignupComponent
 
   constructor(
     private fb: FormBuilder,
-    private renderer: Renderer2,
     private authService: AuthService,
     pageLoader: PageLoaderService
   ) {
@@ -80,9 +81,24 @@ export class SignupComponent
     this.formSubmited = false;
   }
 
-  signup() {
+  async signup() {
     this.formSubmited = true;
-    console.log(this.signupForm);
+    if (this.signupForm.invalid) {
+      return;
+    }
+
+    const signupUser: ISignupDto = this.signupForm.value;
+
+    try {
+      this.pageLoader.showLoader();
+      await this.authService.signup(signupUser).toResult();
+    } catch (ex) {
+      const errors: string[] = (ex as HttpErrorResponse).error.error.user;
+      this.signupErrors = errors;
+      throw ex;
+    } finally {
+      this.pageLoader.hideLoader();
+    }
   }
 
   private initializeSignupForm() {

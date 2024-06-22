@@ -35,7 +35,14 @@ export class AuthService {
     );
   }
 
-  async signup(user: ISignupDto) {}
+  signup(user: ISignupDto) {
+    return this.authController.Signup(user).pipe(
+      map((result) => {
+        if (result) this.setCurrentUser(result);
+        return result;
+      })
+    );
+  }
 
   signout() {
     localStorage.removeItem('token');
@@ -60,7 +67,7 @@ export class AuthService {
 
     localStorage.setItem('token', result.token);
     this.currentUserSource.next(userSource);
-    console.log(userSource);
+    this.router.navigateByUrl('/');
   }
 
   getDecodedToken(token: string) {

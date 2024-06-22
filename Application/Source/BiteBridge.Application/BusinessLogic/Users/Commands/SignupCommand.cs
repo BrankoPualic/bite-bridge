@@ -119,7 +119,7 @@ internal class SignupCommandHandler : BaseCommandHandler<SignupCommand, Authoriz
 
 		if (userExist)
 		{
-			throw new FluentValidationException(nameof(request.User.Email), ResourceValidation.Entity_Already_Exist.AppendArgument("User"));
+			throw new FluentValidationException(nameof(request.User), ResourceValidation.Entity_Already_Exist.AppendArgument("User"));
 		}
 
 		User user = new();
