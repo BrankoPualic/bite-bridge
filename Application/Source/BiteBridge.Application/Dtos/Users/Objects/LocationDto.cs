@@ -6,6 +6,7 @@ public partial class LocationDto
 {
 	public string PrimaryAddress { get; set; } = string.Empty;
 	public string? SecondaryAddress { get; set; }
+	public string City { get; set; } = string.Empty;
 	public string State { get; set; } = string.Empty;
 	public string ZipCode { get; set; } = string.Empty;
 
@@ -15,6 +16,7 @@ public partial class LocationDto
 		{
 			PrimaryAddress = PrimaryAddress,
 			SecondaryAddress = SecondaryAddress,
+			City = City,
 			State = State,
 			ZipCode = ZipCode,
 		};

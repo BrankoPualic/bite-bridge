@@ -85,6 +85,10 @@ public class SignupCommandValidator : AbstractValidator<SignupCommand>
 			.When(_ => _.User.Location.SecondaryAddress.HasValue())
 			.WithMessage(ResourceValidation.Required.AppendArgument("Secondary Address"));
 
+		RuleFor(_ => _.User.Location.City)
+			.NotEmpty()
+			.WithMessage(ResourceValidation.Required.AppendArgument("City"));
+
 		RuleFor(_ => _.User.Location.State)
 			.NotEmpty()
 			.WithMessage(ResourceValidation.Required.AppendArgument("State"));

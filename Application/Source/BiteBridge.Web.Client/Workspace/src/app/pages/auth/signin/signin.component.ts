@@ -33,15 +33,14 @@ export class SigninComponent
     private fb: FormBuilder,
     private renderer: Renderer2,
     private authService: AuthService,
-    private pageLoader: PageLoaderService
+    pageLoader: PageLoaderService
   ) {
-    super();
+    super(pageLoader);
   }
 
   get emailErrors() {
     return this.signinForm.get('email')?.errors;
   }
-
   get passwordErrors() {
     return this.signinForm.get('password')?.errors;
   }

@@ -22,6 +22,8 @@ export class Constants {
   static readonly VALIDATION_TYPE_EMAIL = 'email';
   static readonly VALIDATION_TYPE_PATTERN = 'pattern';
   static readonly VALIDATION_TYPE_MAX_LENGTH = 'maxlength';
+  static readonly VALIDATION_TYPE_NOT_MATCHING = 'notMatching';
+  static readonly VALIDATION_TYPE_MINIMUM_AGE = 'minimumAge';
 
   // Validation Messages
 
@@ -31,4 +33,10 @@ export class Constants {
     'Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long';
   static readonly VALIDATION_MAX_LENGTH =
     'Maximum number of characters exceeded';
+  static readonly VALIDATION_NOT_MATCHING = "Fields don't match";
+  static readonly VALIDATION_MINIMUM_AGE = 'Minimum age required';
+  static readonly VALIDATION_PHONE_NUMBER =
+    'Phone number must be in format xxx-xxx-xxxx';
+  static readonly VALIDATION_ZIP_CODE =
+    'Zip code must be in format 5 digits or 5 digits followed by hypen and 4 more digits';
 }

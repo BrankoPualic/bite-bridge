@@ -11,8 +11,7 @@
       <div class="d-flex flex-column gap-2 my-4">
         <label for="email">Email Address</label>
         <div class="relative">
-          @if(signinForm.invalid && formSubmited &&
-          getErrorMessages(emailErrors).length > 0){
+          @if(isFormInvalid(signinForm, formSubmited, emailErrors)){
           <i
             class="pi pi-exclamation-circle validation-input-icon"
             [pTooltip]="tooltipContent"
@@ -26,14 +25,16 @@
           </ng-template>
           }
           <input
+            type="email"
             class="form-control"
             id="email"
             formControlName="email"
             [ngClass]="{
-              'input-invalid':
-                signinForm.invalid &&
-                formSubmited &&
-                getErrorMessages(emailErrors).length > 0
+              'input-invalid': isFormInvalid(
+                signinForm,
+                formSubmited,
+                emailErrors
+              )
             }"
           />
         </div>
@@ -41,8 +42,7 @@
       <div class="d-flex flex-column gap-2 mb-4">
         <label for="password">Password</label>
         <div class="relative">
-          @if(signinForm.invalid && formSubmited &&
-          getErrorMessages(passwordErrors).length > 0){
+          @if(isFormInvalid(signinForm, formSubmited, passwordErrors)){
           <i
             class="pi pi-exclamation-circle validation-input-icon"
             [pTooltip]="tooltipContent"
@@ -62,10 +62,11 @@
             class="form-control align-items-center"
             #password
             [ngClass]="{
-              'input-invalid':
-                signinForm.invalid &&
-                formSubmited &&
-                getErrorMessages(passwordErrors).length > 0
+              'input-invalid': isFormInvalid(
+                signinForm,
+                formSubmited,
+                passwordErrors
+              )
             }"
           />
 
