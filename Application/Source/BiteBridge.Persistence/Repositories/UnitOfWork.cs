@@ -1,6 +1,8 @@
-﻿using BiteBridge.Domain.Repositories;
+﻿using BiteBridge.Domain.Entities._Base;
+using BiteBridge.Domain.Repositories;
 using BiteBridge.Persistence.Contexts;
 using BiteBridge.Persistence.Repositories._Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace BiteBridge.Persistence.Repositories;
 

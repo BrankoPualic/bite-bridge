@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using BiteBridge.Domain.Entities._Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BiteBridge.Domain.Entities.Application;
 

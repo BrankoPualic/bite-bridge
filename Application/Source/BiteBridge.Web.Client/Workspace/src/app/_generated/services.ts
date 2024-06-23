@@ -7,6 +7,7 @@ import { IAuthorizationDto } from './interfaces';
 import { ISignupDto } from './interfaces';
 import { ISigninDto } from './interfaces';
 import { ICategoryResponseDto } from './interfaces';
+import { ICategoryEntryDto } from './interfaces';
 
 @Injectable() export abstract class BaseController
 {
@@ -53,6 +54,20 @@ import { ICategoryResponseDto } from './interfaces';
 	{
 		return this.httpClient.get<ICategoryResponseDto[]>(
 		this.settingsService.createApiUrl('Category/GetAll'),
+		{
+			responseType: 'json',
+			observe: 'response',
+			withCredentials: true
+		})
+		.pipe(map(response => response.body));
+		
+	}
+	public Add(category: ICategoryEntryDto) : Observable<any>
+	{
+		const body = <any>category;
+		return this.httpClient.post<any>(
+		this.settingsService.createApiUrl('Category/Add'),
+		body,
 		{
 			responseType: 'json',
 			observe: 'response',

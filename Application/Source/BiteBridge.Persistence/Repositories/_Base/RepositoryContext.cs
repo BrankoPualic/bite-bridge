@@ -2,17 +2,9 @@
 
 namespace BiteBridge.Persistence.Repositories._Base;
 
-public abstract class RepositoryContext : IDisposable
+public abstract class RepositoryContext(ApplicationContext context) : IDisposable
 {
-	protected readonly ApplicationContext _context;
+	protected readonly ApplicationContext _context = context;
 
-	protected RepositoryContext(ApplicationContext context)
-	{
-		_context = context;
-	}
-
-	public void Dispose()
-	{
-		_context.Dispose();
-	}
+	public void Dispose() => _context.Dispose();
 }

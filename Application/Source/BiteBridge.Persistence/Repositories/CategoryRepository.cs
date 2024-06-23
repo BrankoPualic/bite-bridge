@@ -13,6 +13,18 @@ public class CategoryRepository : RepositoryContext, ICategoryRepository
 	{
 	}
 
+	public void Add(Category category) => _context.Categories.Add(category);
+
+	public async Task<Category?> FindAsync(int id, CancellationToken cancellationToken = default)
+	{
+		return await _context.Categories.FindAsync([id], cancellationToken: cancellationToken);
+	}
+
+	public async Task<Category?> FindAsync(string name, CancellationToken cancellationToken = default)
+	{
+		return await _context.Categories.SingleOrDefaultAsync(_ => _.Name.Equals(name), cancellationToken);
+	}
+
 	public async Task<IEnumerable<Category>> GetAllAsync(CancellationToken cancellationToken = default)
 	{
 		var allCategories = await _context.Categories

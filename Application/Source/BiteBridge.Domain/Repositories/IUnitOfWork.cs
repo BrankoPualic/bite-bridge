@@ -1,4 +1,6 @@
-﻿namespace BiteBridge.Domain.Repositories;
+﻿using BiteBridge.Domain.Entities._Base;
+
+namespace BiteBridge.Domain.Repositories;
 
 public interface IUnitOfWork
 {
