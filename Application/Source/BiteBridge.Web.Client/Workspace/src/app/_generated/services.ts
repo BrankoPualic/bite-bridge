@@ -76,6 +76,20 @@ import { ICategoryEntryDto } from './interfaces';
 		.pipe(map(response => response.body));
 		
 	}
+	public Update(id: number, category: ICategoryEntryDto) : Observable<any>
+	{
+		const body = <any>category;
+		return this.httpClient.put<any>(
+		this.settingsService.createApiUrl('Category/Update') + '/' + id,
+		body,
+		{
+			responseType: 'json',
+			observe: 'response',
+			withCredentials: true
+		})
+		.pipe(map(response => response.body));
+		
+	}
 	constructor (httpClient: HttpClient, settingsService: SettingsService)
 	{
 		super(httpClient, settingsService);

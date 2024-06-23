@@ -25,4 +25,12 @@ public class CategoryController : BaseController
 		await Mediator.Send(new AddCategoryCommand(category));
 		return Created();
 	}
+
+	[HttpPut("{id}")]
+	[AngularMethod(typeof(void))]
+	public async Task<IActionResult> Update(int id, CategoryEntryDto category)
+	{
+		await Mediator.Send(new UpdateCategoryCommand(id, category));
+		return NoContent();
+	}
 }
