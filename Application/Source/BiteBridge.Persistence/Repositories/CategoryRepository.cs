@@ -7,12 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BiteBridge.Persistence.Repositories;
 
-public class CategoryRepository : RepositoryContext, ICategoryRepository
+public class CategoryRepository(ApplicationContext context) : RepositoryContext(context), ICategoryRepository
 {
-	public CategoryRepository(ApplicationContext context) : base(context)
-	{
-	}
-
 	public void Add(Category category) => _context.Categories.Add(category);
 
 	public async Task<Category?> FindAsync(int id, CancellationToken cancellationToken = default)
@@ -41,4 +37,6 @@ public class CategoryRepository : RepositoryContext, ICategoryRepository
 
 		return topLevelCategories;
 	}
+
+	public void Remove(Category category) => _context.Categories.Remove(category);
 }

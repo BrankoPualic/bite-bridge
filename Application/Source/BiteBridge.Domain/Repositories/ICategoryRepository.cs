@@ -11,4 +11,6 @@ public interface ICategoryRepository
 	Task<Category?> FindAsync(string name, CancellationToken cancellationToken = default);
 
 	void Add(Category category);
+
+	void Remove(Category category);
 }

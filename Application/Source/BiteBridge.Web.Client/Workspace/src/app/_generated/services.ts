@@ -90,6 +90,18 @@ import { ICategoryEntryDto } from './interfaces';
 		.pipe(map(response => response.body));
 		
 	}
+	public Remove(id: number) : Observable<any>
+	{
+		return this.httpClient.delete<any>(
+		this.settingsService.createApiUrl('Category/Remove') + '/' + id,
+		{
+			responseType: 'json',
+			observe: 'response',
+			withCredentials: true
+		})
+		.pipe(map(response => response.body));
+		
+	}
 	constructor (httpClient: HttpClient, settingsService: SettingsService)
 	{
 		super(httpClient, settingsService);

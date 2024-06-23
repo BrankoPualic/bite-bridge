@@ -73,8 +73,6 @@ public class ExceptionMiddleware
 
 	private static Task HandleUnauthorizedAsync(HttpContext context)
 	{
-		context.Response.ContentType = "application/json";
-
 		var response = new UnauthorizedAccessException();
 
 		var settings = new JsonSerializerSettings

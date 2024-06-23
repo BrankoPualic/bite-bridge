@@ -8,12 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BiteBridge.Web.Api.Controllers;
 
-public class AuthController : BaseController
+public class AuthController(IMediator mediator) : BaseController(mediator)
 {
-	public AuthController(IMediator mediator) : base(mediator)
-	{
-	}
-
 	[HttpPost]
 	[AngularMethod(typeof(AuthorizationDto))]
 	public async Task<IActionResult> Signup(SignupDto user) => Ok(await Mediator.Send(new SignupCommand(user)));
