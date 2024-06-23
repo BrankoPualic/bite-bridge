@@ -1,6 +1,8 @@
-﻿using BiteBridge.Domain.Repositories;
+﻿using BiteBridge.Domain.Entities._Base;
+using BiteBridge.Domain.Repositories;
 using BiteBridge.Persistence.Contexts;
 using BiteBridge.Persistence.Repositories._Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace BiteBridge.Persistence.Repositories;
 
@@ -17,6 +19,8 @@ public class UnitOfWork : RepositoryContext, IUnitOfWork
 	public IUserRepository UserRepository => new UserRepository(_context);
 
 	public IUserRoleRepository UserRoleRepository => new UserRoleRepository(_context);
+
+	public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
 
 	#endregion Repositories
 

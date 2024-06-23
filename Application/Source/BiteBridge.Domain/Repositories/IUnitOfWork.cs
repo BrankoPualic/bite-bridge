@@ -1,4 +1,6 @@
-﻿namespace BiteBridge.Domain.Repositories;
+﻿using BiteBridge.Domain.Entities._Base;
+
+namespace BiteBridge.Domain.Repositories;
 
 public interface IUnitOfWork
 {
@@ -7,6 +9,7 @@ public interface IUnitOfWork
 	IErrorLogRepository ErrorLogRepository { get; }
 	IUserRepository UserRepository { get; }
 	IUserRoleRepository UserRoleRepository { get; }
+	ICategoryRepository CategoryRepository { get; }
 
 	#endregion Repositories
 

@@ -2,6 +2,18 @@ export interface IAuthorizationDto
 {
 	token: string;
 }
+export interface ICategoryEntryDto
+{
+	name: string;
+	parentId?: number;
+}
+export interface ICategoryResponseDto
+{
+	id: number;
+	name: string;
+	parentId?: number;
+	subCategories?: ICategoryResponseDto[];
+}
 export interface ILocationDto
 {
 	primaryAddress: string;

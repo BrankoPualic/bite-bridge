@@ -1,6 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace BiteBridge.Application.BusinessLogic._Behaviors;
 
