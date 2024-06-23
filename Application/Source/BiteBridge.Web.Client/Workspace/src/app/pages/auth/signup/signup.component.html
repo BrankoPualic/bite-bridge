@@ -1,0 +1,434 @@
+<div class="d-flex align-items-center w-100">
+  <div class="w-60 full-page-height relative">
+    <div class="auth-page-text">
+      <h1>Welcome to BiteBridge: Your Meal Box Subscription</h1>
+      <p>
+        BiteBridge is a place where healthy eating meets convenience.
+        <strong>Sign up</strong> to access your subscription, track your meal
+        preferences, and discover new features that make meal planning a breeze.
+      </p>
+    </div>
+    <img
+      src="https://res-console.cloudinary.com/dhryqnufr/thumbnails/v1/image/upload/v1718909825/Yml0ZS1icmlkZ2Uvc2lnbmluX2ltYWdlX2ViYWVnZQ==/drilldown"
+      alt=""
+    />
+  </div>
+  <div class="px-5 w-40">
+    <h2>Sign up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="signup()" class="w-90 relative">
+      <div class="d-flex justify-content-between col-12 my-2">
+        <div class="col-3">
+          <label for="firstName"
+            >First Name<span class="asterisk">*</span></label
+          >
+          <div class="relative">
+            @if(isFormInvalid(signupForm, formSubmited, firstNameErrors)){
+            <i
+              class="pi pi-exclamation-circle validation-input-icon"
+              [pTooltip]="tooltipContent"
+              tooltipStyleClass="validation-tooltip"
+              tooltipPosition="left"
+            ></i>
+            <ng-template #tooltipContent>
+              @for(error of getErrorMessages(firstNameErrors); track $index){
+              {{ error }}<br />
+              }
+            </ng-template>
+            }
+            <input
+              type="text"
+              class="form-control"
+              id="firstName"
+              formControlName="firstName"
+              [ngClass]="{
+                'input-invalid': isFormInvalid(
+                  signupForm,
+                  formSubmited,
+                  firstNameErrors
+                )
+              }"
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <label for="middleName">Middle Name</label>
+          <div class="relative">
+            <input
+              type="text"
+              class="form-control"
+              id="middleName"
+              formControlName="middleName"
+            />
+          </div>
+        </div>
+        <div class="col-4">
+          <label for="lastName">Last Name<span class="asterisk">*</span></label>
+          <div class="relative">
+            @if(isFormInvalid(signupForm, formSubmited, lastNameErrors)){
+            <i
+              class="pi pi-exclamation-circle validation-input-icon"
+              [pTooltip]="tooltipContent"
+              tooltipStyleClass="validation-tooltip"
+              tooltipPosition="left"
+            ></i>
+            <ng-template #tooltipContent>
+              @for(error of getErrorMessages(lastNameErrors); track $index){
+              {{ error }} <br />
+              }
+            </ng-template>
+            }
+            <input
+              type="text"
+              class="form-control"
+              id="lastName"
+              formControlName="lastName"
+              [ngClass]="{
+                'input-invalid': isFormInvalid(
+                  signupForm,
+                  formSubmited,
+                  lastNameErrors
+                )
+              }"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between col-12 mb-2">
+        <div class="col-7">
+          <label for="email"
+            >Email Address<span class="asterisk">*</span></label
+          >
+          <div class="relative">
+            @if(isFormInvalid(signupForm, formSubmited, emailErrors)){
+            <i
+              class="pi pi-exclamation-circle validation-input-icon"
+              [pTooltip]="tooltipContent"
+              tooltipStyleClass="validation-tooltip"
+              tooltipPosition="left"
+            ></i>
+            <ng-template #tooltipContent>
+              @for(error of getErrorMessages(emailErrors); track $index){
+              {{ error }}<br />
+              }
+            </ng-template>
+            }
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              [ngClass]="{
+                'input-invalid': isFormInvalid(
+                  signupForm,
+                  formSubmited,
+                  emailErrors
+                )
+              }"
+            />
+          </div>
+        </div>
+        <div class="col-4">
+          <label for="dob">Date of Birth<span class="asterisk">*</span></label>
+          <div class="relative">
+            @if(isFormInvalid(signupForm, formSubmited, dateOfBirthErrors)){
+            <i
+              class="pi pi-exclamation-circle validation-input-icon"
+              [pTooltip]="tooltipContent"
+              tooltipStyleClass="validation-tooltip"
+              tooltipPosition="left"
+            ></i>
+            <ng-template #tooltipContent>
+              @for(error of getErrorMessages(dateOfBirthErrors); track $index){
+              {{ error }}<br />
+              }
+            </ng-template>
+            }
+            <input
+              type="date"
+              class="form-control"
+              id="dob"
+              formControlName="dateOfBirth"
+              [ngClass]="{
+                'input-invalid': isFormInvalid(
+                  signupForm,
+                  formSubmited,
+                  dateOfBirthErrors
+                )
+              }"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between col-12 mb-2">
+        <div class="col-5">
+          <label for="password">Password<span class="asterisk">*</span></label>
+          <div class="relative">
+            @if(isFormInvalid(signupForm, formSubmited, passwordErrors)){
+            <i
+              class="pi pi-exclamation-circle validation-input-icon"
+              [pTooltip]="tooltipContent"
+              tooltipStyleClass="validation-tooltip"
+              tooltipPosition="left"
+            ></i>
+            <ng-template #tooltipContent>
+              @for(error of getErrorMessages(passwordErrors); track $index){
+              {{ error }}<br />
+              }
+            </ng-template>
+            }
+            <p-password
+              class="w-100 d-flex"
+              id="password"
+              [toggleMask]="true"
+              formControlName="password"
+              [inputStyleClass]="
+                isFormInvalid(signupForm, formSubmited, passwordErrors)
+                  ? 'form-control align-items-center input-invalid w-100'
+                  : 'form-control align-items-center w-100'
+              "
+            />
+          </div>
+        </div>
+        <div class="col-5">
+          <label for="confirmPassword"
+            >Confirm Password<span class="asterisk">*</span></label
+          >
+          <div class="relative">
+            @if(isFormInvalid(signupForm, formSubmited, confirmPasswordErrors)){
+            <i
+              class="pi pi-exclamation-circle validation-input-icon"
+              [pTooltip]="tooltipContent"
+              tooltipStyleClass="validation-tooltip"
+              tooltipPosition="left"
+            ></i>
+            <ng-template #tooltipContent>
+              @for(error of getErrorMessages(confirmPasswordErrors); track
+              $index){
+              {{ error }}<br />
+              }
+            </ng-template>
+            }
+            <input
+              type="password"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              class="form-control align-items-center"
+              [ngClass]="{
+                'input-invalid': isFormInvalid(
+                  signupForm,
+                  formSubmited,
+                  confirmPasswordErrors
+                )
+              }"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between col-12 mb-2">
+        <div class="col-5">
+          <label for="homeNumber"
+            >Home Number<span class="asterisk">*</span></label
+          >
+          <div class="relative">
+            @if(isFormInvalid(signupForm, formSubmited, homeNumberErrors)){
+            <i
+              class="pi pi-exclamation-circle validation-input-icon"
+              [pTooltip]="tooltipContent"
+              tooltipStyleClass="validation-tooltip"
+              tooltipPosition="left"
+            ></i>
+            <ng-template #tooltipContent>
+              @for(error of getErrorMessages(homeNumberErrors); track $index){
+              {{ error }}<br />
+              }
+            </ng-template>
+            }
+            <input
+              type="text"
+              id="homeNumber"
+              formControlName="homeNumber"
+              class="form-control align-items-center"
+              placeholder="xxx-xxx-xxxx"
+              [ngClass]="{
+                'input-invalid': isFormInvalid(
+                  signupForm,
+                  formSubmited,
+                  homeNumberErrors
+                )
+              }"
+            />
+          </div>
+        </div>
+        <div class="col-5">
+          <label for="officeNumber">Office Number</label>
+          <div class="relative">
+            <input
+              type="text"
+              id="officeNumber"
+              formControlName="officeNumber"
+              class="form-control align-items-center"
+              placeholder="xxx-xxx-xxxx"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-2" formGroupName="location">
+        <div class="d-flex justify-content-between col-12 mb-2">
+          <div class="col-5">
+            <label for="primaryAddress"
+              >Primary Address<span class="asterisk">*</span></label
+            >
+            <div class="relative">
+              @if(isFormInvalid(signupForm, formSubmited,
+              primaryAddressErrors)){
+              <i
+                class="pi pi-exclamation-circle validation-input-icon"
+                [pTooltip]="tooltipContent"
+                tooltipStyleClass="validation-tooltip"
+                tooltipPosition="left"
+              ></i>
+              <ng-template #tooltipContent>
+                @for(error of getErrorMessages(primaryAddressErrors); track
+                $index){
+                {{ error }}<br />
+                }
+              </ng-template>
+              }
+              <input
+                type="text"
+                id="primaryAddress"
+                formControlName="primaryAddress"
+                class="form-control align-items-center"
+                [ngClass]="{
+                  'input-invalid': isFormInvalid(
+                    signupForm,
+                    formSubmited,
+                    primaryAddressErrors
+                  )
+                }"
+              />
+            </div>
+          </div>
+          <div class="col-5">
+            <label for="secondaryAddress">Secondary Address</label>
+            <div class="relative">
+              <input
+                type="text"
+                id="secondaryAddress"
+                formControlName="secondaryAddress"
+                class="form-control align-items-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between col-12">
+          <div class="col-4">
+            <label for="city">City<span class="asterisk">*</span></label>
+            <div class="relative">
+              @if(isFormInvalid(signupForm, formSubmited, cityErrors)){
+              <i
+                class="pi pi-exclamation-circle validation-input-icon"
+                [pTooltip]="tooltipContent"
+                tooltipStyleClass="validation-tooltip"
+                tooltipPosition="left"
+              ></i>
+              <ng-template #tooltipContent>
+                @for(error of getErrorMessages(cityErrors); track $index){
+                {{ error }}<br />
+                }
+              </ng-template>
+              }
+              <input
+                type="text"
+                id="city"
+                formControlName="city"
+                class="form-control align-items-center"
+                [ngClass]="{
+                  'input-invalid': isFormInvalid(
+                    signupForm,
+                    formSubmited,
+                    cityErrors
+                  )
+                }"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <label for="state">State<span class="asterisk">*</span></label>
+            <div class="relative">
+              @if(isFormInvalid(signupForm, formSubmited, stateErrors)){
+              <i
+                class="pi pi-exclamation-circle validation-input-icon"
+                [pTooltip]="tooltipContent"
+                tooltipStyleClass="validation-tooltip"
+                tooltipPosition="left"
+              ></i>
+              <ng-template #tooltipContent>
+                @for(error of getErrorMessages(stateErrors); track $index){
+                {{ error }}<br />
+                }
+              </ng-template>
+              }
+              <input
+                type="text"
+                id="state"
+                formControlName="state"
+                class="form-control align-items-center"
+                [ngClass]="{
+                  'input-invalid': isFormInvalid(
+                    signupForm,
+                    formSubmited,
+                    stateErrors
+                  )
+                }"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <label for="zipCode">Zip Code<span class="asterisk">*</span></label>
+            <div class="relative">
+              @if(isFormInvalid(signupForm, formSubmited, zipCodeErrors)){
+              <i
+                class="pi pi-exclamation-circle validation-input-icon"
+                [pTooltip]="tooltipContent"
+                tooltipStyleClass="validation-tooltip"
+                tooltipPosition="left"
+              ></i>
+              <ng-template #tooltipContent>
+                @for(error of getErrorMessages(zipCodeErrors); track $index){
+                {{ error }}<br />
+                }
+              </ng-template>
+              }
+              <input
+                type="text"
+                id="zipCode"
+                formControlName="zipCode"
+                class="form-control align-items-center"
+                [ngClass]="{
+                  'input-invalid': isFormInvalid(
+                    signupForm,
+                    formSubmited,
+                    zipCodeErrors
+                  )
+                }"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input
+        type="submit"
+        class="btn btn-primary btn-lg mt-2"
+        value="Sign up"
+      />
+      <div class="validation-feedback">
+        @for (error of signupErrors; track $index) {
+        <p>{{ error }}</p>
+        }
+      </div>
+    </form>
+  </div>
+</div>

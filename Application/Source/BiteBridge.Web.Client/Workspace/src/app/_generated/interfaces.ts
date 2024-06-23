@@ -14,6 +14,14 @@ export interface ICategoryResponseDto
 	parentId?: number;
 	subCategories?: ICategoryResponseDto[];
 }
+export interface ILocationDto
+{
+	primaryAddress: string;
+	secondaryAddress?: string;
+	city: string;
+	state: string;
+	zipCode: string;
+}
 export interface ISigninDto
 {
 	email: string;
@@ -30,8 +38,5 @@ export interface ISignupDto
 	dateOfBirth: Date;
 	homeNumber: string;
 	officeNumber?: string;
-	primaryAddress: string;
-	secondaryAddress?: string;
-	state: string;
-	zipCode: string;
+	location: ILocationDto;
 }

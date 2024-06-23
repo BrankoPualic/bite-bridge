@@ -1,14 +1,10 @@
-@import "assets/styles//variables";
+@import "assets/styles/variables";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "assets/styles/bootswatch";
-@import "../node_modules/primeicons/primeicons.css";
+@import "assets/styles/primeng";
 
-* {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style-type: none;
+body {
+  background-color: $gray-200;
 }
 
 .backdrop {
@@ -18,4 +14,84 @@
   width: 100dvw;
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+.w-30 {
+  width: 30% !important;
+}
+.w-33 {
+  width: 33% !important;
+}
+.w-40 {
+  width: 40% !important;
+}
+.w-45 {
+  width: 45% !important;
+}
+.w-60 {
+  width: 60% !important;
+}
+.w-66 {
+  width: 66% !important;
+}
+.w-80 {
+  width: 80% !important;
+}
+.w-90 {
+  width: 90% !important;
+}
+
+.asterisk {
+  color: $red;
+}
+
+.full-page-height {
+  height: 100dvh !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.right-input-icon {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+}
+
+.validation-input-icon {
+  color: $red;
+  position: absolute;
+  top: 50%;
+  right: -1.5rem;
+  transform: translateY(-50%);
+}
+
+.input-invalid {
+  border-color: $red;
+  background-image: none;
+}
+
+.validation-feedback {
+  color: $light-red;
+  position: absolute;
+  bottom: -3.5rem;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  p {
+    margin-top: 1rem;
+  }
 }

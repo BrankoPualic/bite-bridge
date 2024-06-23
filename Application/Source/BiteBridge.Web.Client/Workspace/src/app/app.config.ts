@@ -1,14 +1,27 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  Provider,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { jwtInterceptor } from './interceptors/jwt.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { MessageService } from 'primeng/api';
+
+import './extensions/string-extension';
+import './extensions/observable-extension';
+import { AuthController } from './_generated/services';
+import { SettingsService } from './services/settings.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +29,19 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideAnimations(),
-    provideHttpClient(withInterceptors([jwtInterceptor, errorInterceptor])),
-    MessageService,
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([jwtInterceptor, errorInterceptor])
+    ),
+    servicesProvider(),
+    controllersProvider(),
   ],
 };
+
+function controllersProvider(): Provider[] {
+  return [AuthController];
+}
+
+function servicesProvider(): Provider[] {
+  return [SettingsService, MessageService];
+}

@@ -5,9 +5,8 @@ namespace BiteBridge.Application.BusinessLogic._Behaviors;
 public class PerformanceMonitoringBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
 	where TRequest : IRequest<TResponse>
 {
-	private const int THRESHOLD = 5000;
-
 	private readonly ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> _logger;
+	private const int THRESHOLD = 5000;
 
 	public PerformanceMonitoringBehavior(ILogger<PerformanceMonitoringBehavior<TRequest, TResponse>> logger)
 	{
